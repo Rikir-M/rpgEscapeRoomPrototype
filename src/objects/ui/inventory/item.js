@@ -1,6 +1,7 @@
 export function inventoryItem(ref, x, y, index, itemName) {
 	if (itemName) {
 		loadSprite(itemName, `/sprites/${itemName}.png`);
+		sessionStorage.setItem(`slot${index}`, false);
 
 		ref.add([
 			sprite(itemName),
@@ -8,18 +9,9 @@ export function inventoryItem(ref, x, y, index, itemName) {
 			anchor("center"),
 			pos(x, y),
 			z(13),
+			`slot${index}`,
 		]);
-
-		ref.onButtonPress(`slot${index}`, () => {
-			sessionStorage.setItem(`slot${index}`, `Coming from index: ${index}`);
-		});
 	}
 
-	return ref.add([
-		rect(64, 64, { radius: 4 }),
-		anchor("center"),
-		pos(x, y),
-		outline(4),
-		z(12),
-	]);
+	return;
 }

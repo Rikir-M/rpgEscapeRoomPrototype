@@ -13,11 +13,28 @@ export function inventorySlot(ref, x, y, index) {
 		z(13),
 	]);
 
+	onClick(`item-slot${index}`, (ref) => {
+		const canUse = sessionStorage.getItem("canUseItems") === "true";
+		if (!canUse) return;
+
+		const state = sessionStorage.getItem(`slot${index}`) === "false";
+
+		if (state) {
+			ref.use(color(110, 231, 183));
+			sessionStorage.setItem(`slot${index}`, true);
+		} else {
+			ref.use(color(255, 255, 255));
+			sessionStorage.setItem(`slot${index}`, false);
+		}
+	});
+
 	return ref.add([
 		rect(64, 64, { radius: 4 }),
 		anchor("center"),
 		pos(x, y),
 		outline(4),
 		z(12),
+		area(),
+		`item-slot${index}`,
 	]);
 }

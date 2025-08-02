@@ -1,6 +1,6 @@
 export const inventory = () => {
 	return add([
-		rect(164, height() - 400, { radius: 4 }),
+		rect(0, 0, { radius: 4 }),
 		anchor("center"),
 		pos(width(), height() / 2 - 60),
 		outline(4),

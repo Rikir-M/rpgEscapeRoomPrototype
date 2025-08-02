@@ -1,6 +1,7 @@
 import kaplay from "kaplay";
-import { inventory, inventoryItem, inventorySlot } from "./objects";
+import { inventory, inventoryItem, inventorySlot, timer } from "./objects";
 
+sessionStorage.clear();
 // Simple dialogues with character avatars
 kaplay({
 	background: "#607D8B",
@@ -36,7 +37,7 @@ kaplay({
 // Inventory
 // + ---------------------------------------------- +
 const inventoryBar = inventory();
-for (let i = -2; i < 4; i++) {
+for (let i = -2; i < 1; i++) {
 	inventorySlot(
 		inventoryBar,
 		-40,
@@ -46,16 +47,43 @@ for (let i = -2; i < 4; i++) {
 	onButtonPress(`slot${i + 3}`, (btn) => {
 		debug.log(btn);
 	});
-	if (i + 3 === 1) {
-		inventoryItem(
-			inventoryBar,
-			-40,
-			(-1 * inventoryBar.height) / 6 + i * 64,
-			i + 3,
-			"bowie-knife",
-		);
+}
+
+function createInventoryItems() {
+	for (let i = -2; i < 1; i++) {
+		switch (i + 3) {
+			case 1: // plushie
+				inventoryItem(
+					inventoryBar,
+					-40,
+					(-1 * inventoryBar.height) / 6 + i * 64,
+					i + 3,
+					"squirrel",
+				);
+				break;
+			case 2: // spaceship
+				inventoryItem(
+					inventoryBar,
+					-40,
+					(-1 * inventoryBar.height) / 6 + i * 64,
+					i + 3,
+					"spaceship",
+				);
+				break;
+			case 3: // unsent message
+				inventoryItem(
+					inventoryBar,
+					-40,
+					(-1 * inventoryBar.height) / 6 + i * 64,
+					i + 3,
+					"letter-bomb",
+				);
+				break;
+		}
 	}
 }
+createInventoryItems();
+sessionStorage.setItem("canUseItems", false);
 // #endregion
 
 // Loads all sprites
@@ -173,6 +201,8 @@ const textbox = add([
 	pos(center().x, height() - 100),
 	outline(4),
 	z(10),
+	area(),
+	"textbox",
 ]);
 
 // Text
@@ -209,8 +239,8 @@ const txt = add([
 // Character avatar
 const avatar = add([anchor("center"), pos(center().sub(0, 50)), z(0)]);
 
-onButtonPress("next", (btn) => {
-	debug.log(btn);
+onClick("textbox", () => {
+	if (!allowDialogueClick) return;
 	if (isTalking) {
 		if (writing) {
 			writing.cancel();
@@ -263,6 +293,7 @@ function startWriting(dialog) {
 		}
 	});
 }
+timer();
 
 // When the game finishes loading, the dialog will start updating
 onLoad(() => {
