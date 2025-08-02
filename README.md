@@ -1,27 +1,35 @@
+# Brainstorming
+
+- Theme: "Less is more"
+- Duration Limit: main game in 3mins | 100% completion on 5mins
+
+# Possible Features
+
+- [ ] Achievements Screen
+
 # Folder structure
 
 - `src` - source code for your kaplay project
 - `dist` - distribution folder, contains your index.html, built js bundle and static assets
 
-
 ## Development
 
 ```sh
-$ npm run dev
+npm run dev
 ```
 
-will start a dev server at http://localhost:8000
+will start a dev server at <http://localhost:8000>
 
 ## Distribution
 
 ```sh
-$ npm run build
+npm run build
 ```
 
 will build your js files into `dist/`
 
 ```sh
-$ npm run zip
+npm run zip
 ```
 
 will build your game and package into a .zip file, you can upload to your server or itch.io / newground etc.
