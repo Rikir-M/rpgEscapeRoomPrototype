@@ -14,35 +14,18 @@ export default function callEnding2() {
 	}
 
 	k.scene("ending_2", () => {
-		// Loads all sprites
-		loadSprite("rikir", "/sprites/rikir.png");
-		loadSprite("jun", "/sprites/junAngy03.png");
-		// loadSound("rikir_voice", "/sounds/rikir_voice.wav");
-		// loadSound("jun_voice", "/sounds/jun_voice.wav");
 		loadBitmapFont("happy", "/fonts/happy_28x36.png", 28, 36);
 
 		// Define the characters data
 		const characters = {
-			rikir: {
-				sprite: "rikir",
-				name: "Rikir",
-				// "sound": "rikir_voice",
-				scale: "1",
-			},
-			jun: {
-				sprite: "jun",
-				name: "Jun",
-				// "sound": "jun_voice",
-				scale: "0.8",
+			narration: {
+				name: "Narration",
 			},
 		};
 
 		const dialogs = [
-			[
-				"rikir",
-				"[default]This is the Ending Number 2. Amazing, innit?[/default]",
-			],
-			["jun", "[default]... what?[/default]"],
+			["narration", "[default]You chose to keep the cheap plastic spaceship, clutching it like the most valuable treasure.[/default]"],
+			["narration", "[default]You may be trapped as a dull office worker, but your mind's already halfway to the stars.[/default]"],
 		];
 
 		add([

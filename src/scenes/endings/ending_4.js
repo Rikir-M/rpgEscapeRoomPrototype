@@ -23,26 +23,14 @@ export default function callEnding4() {
 
 		// Define the characters data
 		const characters = {
-			rikir: {
-				sprite: "rikir",
-				name: "Rikir",
-				// "sound": "rikir_voice",
-				scale: "1",
-			},
-			jun: {
-				sprite: "jun",
-				name: "Jun",
-				// "sound": "jun_voice",
-				scale: "0.8",
+			narration: {
+				name: "Narration",
 			},
 		};
 
 		const dialogs = [
-			[
-				"rikir",
-				"[default]This is the Ending Number 4. Amazing, innit?[/default]",
-			],
-			["jun", "[default]... what?[/default]"],
+			["narration", "[default]You can't let go. The door creaks open but not fully. You squeeze through, barely.[/default]"],
+			["narration", "[default]Outside, you stumble forward, weighed down. You made it… but you're exhausted.[/default]"],
 		];
 
 		add([

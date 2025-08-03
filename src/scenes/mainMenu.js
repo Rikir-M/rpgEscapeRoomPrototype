@@ -3,29 +3,42 @@ import callAchievements from "./achievements";
 
 export default function callMainMenu() {
 	k.scene("mainmenu", () => {
-		add([
-			anchor("top"),
-			pos(center().sub(0, 82)),
-			text("Make your Choice"),
-			z(10),
-			area(),
-			"gotoMain",
-		]);
-		add([
-			anchor("top"),
-			pos(center().sub(0, 0)),
-			text("Achievements"),
-			z(10),
-			area(),
-			"gotoAchievements",
-		]);
+		function createButton(textStr, posVec, id) {
+			const btnBg = add([
+				rect(400, 80, { radius: 10 }),
+				color(WHITE),
+				pos(posVec),
+				anchor("center"),
+				area({ cursor: "pointer" }),
+				z(9),
+				id + "_bg",
+			]);
 
-		onClick("gotoMain", () => {
-			k.go("intro");
-		});
-		onClick("gotoAchievements", () => {
-			callAchievements();
-		});
+			const label = add([
+				text(textStr, { size: 36 }),
+				pos(posVec),
+				anchor("center"),
+				color(BLACK),
+				z(10),
+				id,
+			]);
+
+			btnBg.onUpdate(() => {
+				const hovered = btnBg.isHovering();
+				btnBg.color = hovered ? BLACK : WHITE;
+				label.color = hovered ? WHITE : BLACK;
+			});
+
+			btnBg.onClick(() => {
+				if (id === "gotoMain") k.go("intro");
+				if (id === "gotoAchievements") callAchievements();
+			});
+
+			return { btnBg, label };
+		}
+
+		const mainBtn = createButton("Start", center().sub(0, 80), "gotoMain");
+		const achBtn = createButton("Achievements", center().add(0, 40), "gotoAchievements");
 
 		loadSprite("bottle", "/sprites/nectar.png");
 

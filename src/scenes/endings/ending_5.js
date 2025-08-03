@@ -23,26 +23,14 @@ export default function callEnding5() {
 
 		// Define the characters data
 		const characters = {
-			rikir: {
-				sprite: "rikir",
-				name: "Rikir",
-				// "sound": "rikir_voice",
-				scale: "1",
-			},
-			jun: {
-				sprite: "jun",
-				name: "Jun",
-				// "sound": "jun_voice",
-				scale: "0.8",
+			narration: {
+				name: "Narration",
 			},
 		};
 
 		const dialogs = [
-			[
-				"rikir",
-				"[default]This is the Ending Number 5. Amazing, innit?[/default]",
-			],
-			["jun", "[default]... what?[/default]"],
+			["narration", "[default]They matter. They always will. But you've carried them long enough.[/default]"],
+			["narration", "[default]You take a breath… and leave them behind not because they were weight, but because you're ready to walk without them.[/default]"],
 		];
 
 		add([

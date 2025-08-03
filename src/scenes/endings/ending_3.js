@@ -14,35 +14,17 @@ export default function callEnding3() {
 	}
 
 	k.scene("ending_3", () => {
-		// Loads all sprites
-		loadSprite("rikir", "/sprites/rikir.png");
-		loadSprite("jun", "/sprites/junAngy03.png");
-		// loadSound("rikir_voice", "/sounds/rikir_voice.wav");
-		// loadSound("jun_voice", "/sounds/jun_voice.wav");
 		loadBitmapFont("happy", "/fonts/happy_28x36.png", 28, 36);
 
 		// Define the characters data
 		const characters = {
-			rikir: {
-				sprite: "rikir",
-				name: "Rikir",
-				// "sound": "rikir_voice",
-				scale: "1",
-			},
-			jun: {
-				sprite: "jun",
-				name: "Jun",
-				// "sound": "jun_voice",
-				scale: "0.8",
+			narration: {
+				name: "Narration",
 			},
 		};
 
 		const dialogs = [
-			[
-				"rikir",
-				"[default]This is the Ending Number 3. Amazing, innit?[/default]",
-			],
-			["jun", "[default]... what?[/default]"],
+			["narration", "[default]You carry the words you never said. Maybe it will be sent to its destination someday.[/default]"],
 		];
 
 		add([

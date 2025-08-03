@@ -14,35 +14,18 @@ export default function callEnding1() {
 	}
 
 	k.scene("ending_1", () => {
-		// Loads all sprites
-		loadSprite("rikir", "/sprites/rikir.png");
-		loadSprite("jun", "/sprites/junAngy03.png");
-		// loadSound("rikir_voice", "/sounds/rikir_voice.wav");
-		// loadSound("jun_voice", "/sounds/jun_voice.wav");
 		loadBitmapFont("happy", "/fonts/happy_28x36.png", 28, 36);
 
 		// Define the characters data
 		const characters = {
-			rikir: {
-				sprite: "rikir",
-				name: "Rikir",
-				// "sound": "rikir_voice",
-				scale: "1",
-			},
-			jun: {
-				sprite: "jun",
-				name: "Jun",
-				// "sound": "jun_voice",
-				scale: "0.8",
+			narration: {
+				name: "Narration",
 			},
 		};
 
 		const dialogs = [
-			[
-				"rikir",
-				"[default]This is the Ending Number 1. Amazing, innit?[/default]",
-			],
-			["jun", "[default]... what?[/default]"],
+			["narration", "[default]You hug the worn-out plushie tight. Not long after, you start to feel the warmth.[/default]"],
+			["narration", "[default]Maybe growing up isn't about letting go of comfort, but carrying it in your own way.[/default]"],
 		];
 
 		add([

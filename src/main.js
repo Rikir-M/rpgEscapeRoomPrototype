@@ -72,108 +72,73 @@ k.scene("intro", () => {
 		}
 	}
 	createInventoryItems();
+
+	const itemDialogs = {
+		1: [
+			["narration", "[default]A well worn-out plush of a suqirrel.[/default]"],
+			["narration", "[default]It used to be the warmth that comforted you during your worst times, that only friend who would play with you and also the unofficial therapist.[/default]"],
+		],
+		2: [
+			["narration", "[default]A cheap plastic spaceship. It used to take you to many stars and helped you travel through lots of galaxies.[/default]"],
+		],
+		3: [
+			["narration", "[default]An unsent message to...[/default]"],
+			["narration", "[default]It doesn't matter. What matters is that it's showing your hesitation, guilt and regret.[/default]"],
+		],
+	};
+
+	// Hide inventory bar initially and disable item clicks
+	inventoryBar.hidden = true;
 	sessionStorage.setItem("canUseItems", false);
 	// #endregion
 
 	// Loads all sprites
-	loadSprite("rikir", "/sprites/rikir.png");
 	loadSprite("jun", "/sprites/junAngy03.png");
-	// loadSound("rikir_voice", "/sounds/rikir_voice.wav");
-	// loadSound("jun_voice", "/sounds/jun_voice.wav");
 	loadBitmapFont("happy", "/fonts/happy_28x36.png", 28, 36);
 
 	// Define the characters data
 	const characters = {
-		rikir: {
-			sprite: "rikir",
-			name: "Rikir",
-			// "sound": "rikir_voice",
-			scale: "1",
+		narration: {
+			name: "Narration",
 		},
 		jun: {
 			sprite: "jun",
 			name: "Jun",
 			// "sound": "jun_voice",
-			scale: "0.8",
+			scale: "0.7",
 		},
 	};
 
 	// Define the dialogue data [character, text, effects]
 	const dialogs = [
-		["rikir", "[default]Oh hey...[/default]"],
-		["jun", "[default]Huh, what...?[/default]"],
-		["jun", "[default]Wh- where am I?[/default]", "timer"],
-		[
-			"rikir",
-			"[default]Um.. sorry, I know this is a lot but you're gonna be the main character for our game... for now...[/default]",
-		],
-		[
-			"jun",
-			"[surprised]HUH?! Main character![/surprised] [default]What are you talking about?[/default]",
-			"shake",
-		],
-		[
-			"rikir",
-			"[default]Y-Yeah, you kind of woke up late, so we skipped the tutorial... Sorry about that.[/default]",
-		],
-		[
-			"jun",
-			"[surprised]Tutorial?![/surprised] [default]Wait, am I dreaming? Did I hit my head?[/default]",
-			"shake",
-		],
-		[
-			"rikir",
-			"[default]Nope, fully awake. Probably. You'll figure it out. Maybe.[/default]",
-		],
-		["jun", "[default]This has to be a joke... Who even ARE you?[/default]"],
-		[
-			"rikir",
-			"[default]Oh, I'm one of the developers, technically. Rikir, by the way. I'm also figuring things out.[/default]",
-		],
-		[
-			"jun",
-			"[default]Wait- you're the one making this game and YOU don't know what's going on?![/default]",
-		],
-		[
-			"rikir",
-			"[default]In my defense, the game jam theme hasn't been revealed yet. Soooo... we're kinda winging it.[/default]",
-		],
-		[
-			"rikir",
-			"[default]And, well... we.. haven't really coded anything yet. The room barely exists.[/default]",
-		],
-		[
-			"rikir",
-			"[default]Honestly, you're lucky I searched for a sprite for you and there's even a floor..[/default]",
-		],
-		["jun", "[default]Wha- wait, there could be *no* floor?![/default]"],
-		["jun", "[default]You're joking, right? Right?[/default]"],
-		[
-			"rikir",
-			"[default]Look, this is a game jam. We get 48 hours. Do you want polish or vibes?[/default]",
-		],
-		["jun", "[default]...I want to go home.[/default]"],
-		[
-			"rikir",
-			"[default]No can do. You're stuck here until we get the game's theme and figure out what our game will be. Could be fantasy. Could be sci-fi. Could be-[/default]",
-		],
-		["jun", "[default]-'horror'? Please don't say horror-[/default]"],
-		[
-			"rikir",
-			"[default]Anyway, in the meantime... feel free to pace dramatically and talk to yourself.[/default]",
-		],
-		[
-			"jun",
-			"[default]This is going to be the weirdest 48 hours of my life...[/default]",
-		],
-		[
-			"rikir",
-			"[default]Oh and, your name is Jun by the way. That's what the person who created your sprite calls you..[/default]",
-		],
+		["jun", "[default]...?[/default]"],
+		["jun", "[surprised]!!![/surprised]", "shake"],
+		["jun", "[default]Wh- where am I?[/default]"],
+		["jun", "[default]Okay. Jun, don't panic.[/default]"],
+		["jun", "[default]...Why would anyone panic waking up in a strange room?[/default]"],
+		["narration", "[default]You look around the room and notice a digital clock above the only door of the room. But no number is shown.[/default]"],
+		["jun", "[default]What is this, a game? An escape room?[/default]"],
+		["jun", "[default]...Did I forget I signed up for a team-building exercise again?[/default]"],
+		["narration", "[default]You feel the weight on your back and realize there's a backpack you hadn't noticed before.[/default]"],
+		["narration", "[default]Curious, you unzip it slowly, the fabric creaking faintly.[/default]"],
+		["narration", "[default]Inside, three objects come into view.[/default]"],
+		["jun", "[default]...Huh. These...[/default]"],
+		["narration", "[default]A worn-out plushie, a cheap plastic spaceship and a phone with an unsent message glowing faintly on the screen.[/default]", "inventoryOn"],
 		["jun", "[default]...[/default]"],
+		["jun", "[default]Why are these here? Is someone playing a joke?[/default]"],
+		["narration", "[default]You hear a faint voice, no, a whisper.[/default]"],
+		["jun", "[default]Wh- who's there?![/default]"],
+		["narration", "[default]\"To escape here, you must decide what to keep and what to leave behind.\"[/default]"],
+		["narration", "[default]\"You have 3 minutes. And the clock's ticking. Your choice will decide if you get out or stay trapped.\"[/default]"],
+		["narration", "[default]The digital clock lights up and the timer starts.[/default]"],
+		["jun", "[default]...[/default]", "timer"],
 	];
 
-	startDialogueSystem(characters, dialogs);
+	// Start intro dialogues, then enable inventory and clicks
+	startDialogueSystem(characters, dialogs, inventoryBar, () => {
+		sessionStorage.setItem("canUseItems", true);
+		inventoryBar.hidden = false;
+	});
 });
 
 k.go("intro");

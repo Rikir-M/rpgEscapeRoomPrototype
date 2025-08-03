@@ -1,6 +1,7 @@
 import { timer } from "../dialogue/timer";
 
-export default function startDialogueSystem(characters, dialogs) {
+export default function startDialogueSystem(characters, dialogs, inventoryBar) {
+	let inventoryShown = false;
 	// Some effects data
 	const effects = {
 		shake: () => {
@@ -8,7 +9,13 @@ export default function startDialogueSystem(characters, dialogs) {
 		},
 		// setups a QTE for the player to make a choice
 		timer: () => {
-			timer(3); // change the duration of the timer here
+			timer(10); // change the duration of the timer here (gonna change the timer later)
+		},
+		// show inventory at a certain dialog
+		inventoryOn: () => {
+			if (inventoryShown) return;
+			inventoryShown = true;
+			inventoryBar.hidden = false;
 		},
 	};
 
@@ -24,6 +31,27 @@ export default function startDialogueSystem(characters, dialogs) {
 		z(10),
 		area(),
 		"textbox",
+	]);
+
+	// Speaker name background box
+	const speakerBox = add([
+		rect(180, 40, { radius: 8 }),
+		color(WHITE),
+		pos(textbox.pos.sub(0, 100)),
+		anchor("center"),
+		z(10),
+	]);
+
+	// Speaker name text
+	const speakerName = add([
+		text("", {
+			size: 24,
+			align: "center",
+		}),
+		pos(speakerBox.pos),
+		anchor("center"),
+		color(BLACK),
+		z(11),
 	]);
 
 	// Text
@@ -75,16 +103,39 @@ export default function startDialogueSystem(characters, dialogs) {
 
 		// Cycle through the dialogs
 		curDialog = (curDialog + 1) % dialogs.length;
-		updateDialog();
+			updateDialog();
 	});
 
 	// Update the on screen sprite & text
 	function updateDialog() {
 		const [char, dialog, eff] = dialogs[curDialog];
+		const charData = characters[char] || {};
+		const spriteName = charData.sprite;
 
-		// Use a new sprite component to replace the old one
-		avatar.use(sprite(characters[char].sprite));
-		avatar.scale = characters[char].scale ?? 0.8;
+		// Avatar handling
+		if (spriteName) {
+			avatar.use(sprite(spriteName));
+			avatar.scale = charData.scale ?? 0.8;
+			avatar.hidden = false;
+		} else {
+			avatar.hidden = true;
+		}
+
+		// Speaker name display
+		if (char !== "narration" && charData.name) {
+			speakerName.text = charData.name;
+			speakerName.hidden = false;
+			speakerBox.hidden = false;
+
+			// Optional: dynamically adjust box width based on text
+			const padding = 32;
+			speakerBox.width = speakerName.text.length * 14 + padding;
+		} else {
+			speakerName.text = "";
+			speakerName.hidden = true;
+			speakerBox.hidden = true;
+		}
+
 		// Update the dialog text
 		startWriting(dialog, char);
 
