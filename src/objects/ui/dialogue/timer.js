@@ -45,7 +45,7 @@ export function timer(timeToAct) {
 			destroy(timeline);
 
 			// handle base (hp bar holder) animation
-			base.animate("scale", [vec2(1), vec2(1.25, 1), vec2(0, 1)], {
+			base.animate("scale", [vec2(1), vec2(1.05, 1), vec2(0, 1)], {
 				duration: 1,
 				direction: "forward",
 			});

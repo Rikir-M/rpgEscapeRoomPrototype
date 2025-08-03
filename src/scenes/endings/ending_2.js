@@ -2,8 +2,16 @@ import k from "../../main";
 import startDialogueSystem from "../../objects/ui/dialogue/dialogue";
 
 export default function callEnding2() {
-	debug.log("Achievement: 'The small things in life.'");
-	sessionStorage.setItem("achievement_2", true);
+	if (!sessionStorage.getItem("achievement_2")) {
+		debug.log("Achievement: 'Dream beyond four walls'");
+		sessionStorage.setItem(
+			"achievement_2",
+			JSON.stringify({
+				title: "Dream beyond four walls",
+				description: "Never stop dreaming. Be happy.",
+			}),
+		);
+	}
 
 	k.scene("ending_2", () => {
 		// Loads all sprites

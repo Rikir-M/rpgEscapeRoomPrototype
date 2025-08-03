@@ -1,34 +1,59 @@
 import k from "../main";
-import callAchievements from "./achievements";
+import callMainMenu from "./mainMenu";
 
-export default function callMainMenu() {
-	k.scene("mainmenu", () => {
+export default function callAchievements() {
+	k.scene("achievements", () => {
+		if (!sessionStorage.getItem("achievement_6")) {
+			debug.log("Achievement: 'An unnecessary feat.'");
+			sessionStorage.setItem(
+				"achievement_6",
+				JSON.stringify({
+					title: "An unnecessary feat",
+					description: "You opened the Achievement menu. That's it.",
+				}),
+			);
+		}
+
+		// make list
+		for (let i = 1; i <= 6; i++) {
+			const title = add([
+				text(
+					sessionStorage.getItem(`achievement_${i}`)
+						? JSON.parse(sessionStorage.getItem(`achievement_${i}`)).title
+						: "---",
+				),
+				pos(width() / 2, height() / 7 + i * 100),
+				anchor("top"),
+			]);
+			title.add([
+				text(
+					sessionStorage.getItem(`achievement_${i}`)
+						? JSON.parse(sessionStorage.getItem(`achievement_${i}`)).description
+						: "You have not unlocked this yet.",
+					{
+						size: 18,
+					},
+				),
+				pos(0, 42),
+				anchor("top"),
+			]);
+		}
+
+		// return button
 		add([
+			text("back", { size: 26 }),
 			anchor("top"),
-			pos(center().sub(0, 82)),
-			text("Make your Choice"),
-			z(10),
+			pos(width() / 5, 100),
 			area(),
-			"gotoMain",
-		]);
-		add([
-			anchor("top"),
-			pos(center().sub(0, 0)),
-			text("Achievements"),
-			z(10),
-			area(),
-			"gotoAchievements",
+			"return",
 		]);
 
-		onClick("gotoMain", () => {
-			k.go("intro");
-		});
-		onClick("gotoAchievements", () => {
-			callAchievements();
+		onClick("return", () => {
+			callMainMenu();
 		});
 
+		// title
 		loadSprite("bottle", "/sprites/nectar.png");
-
 		const BGs = ["#8465ec", "#873e84", "#c97373", "#5ba675"];
 		const tileSize = 90;
 		const tilesSpeed = 60; // px per second
@@ -45,10 +70,10 @@ export default function callMainMenu() {
 		});
 
 		const logo = add([
-			text("3 minutes to Live"),
-			pos(width() / 2, 140),
-			anchor("center"),
-			scale(1.2),
+			text("Achievements yay :)"),
+			pos(width() / 2, 100),
+			anchor("top"),
+			scale(1),
 			rotate(0),
 			animate({ relative: true }),
 		]);
@@ -109,6 +134,6 @@ export default function callMainMenu() {
 		}
 	});
 
-	return k.go("mainmenu");
+	return k.go("achievements");
 }
-callMainMenu();
+callAchievements();

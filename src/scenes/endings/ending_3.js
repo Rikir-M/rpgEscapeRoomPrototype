@@ -2,8 +2,16 @@ import k from "../../main";
 import startDialogueSystem from "../../objects/ui/dialogue/dialogue";
 
 export default function callEnding3() {
-	debug.log("Achievement: 'The small things in life.'");
-	sessionStorage.setItem("achievement_3", true);
+	if (!sessionStorage.getItem("achievement_3")) {
+		debug.log("Achievement: 'Sound of Silence'");
+		sessionStorage.setItem(
+			"achievement_3",
+			JSON.stringify({
+				title: "Sound of Silence",
+				description: "Hello darkness, my old friend.",
+			}),
+		);
+	}
 
 	k.scene("ending_3", () => {
 		// Loads all sprites

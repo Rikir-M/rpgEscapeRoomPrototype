@@ -2,8 +2,16 @@ import k from "../../main";
 import startDialogueSystem from "../../objects/ui/dialogue/dialogue";
 
 export default function callEnding5() {
-	debug.log("Achievement: 'The small things in life.'");
-	sessionStorage.setItem("achievement_5", true);
+	if (!sessionStorage.getItem("achievement_5")) {
+		debug.log("Achievement: 'A shadow of the past'");
+		sessionStorage.setItem(
+			"achievement_5",
+			JSON.stringify({
+				title: "A shadow of the past",
+				description: "You are ready to walk without them.",
+			}),
+		);
+	}
 
 	k.scene("ending_2", () => {
 		// Loads all sprites

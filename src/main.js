@@ -2,7 +2,6 @@ import kaplay from "kaplay";
 import { inventory, inventoryItem, inventorySlot } from "./objects";
 import startDialogueSystem from "./objects/ui/dialogue/dialogue";
 
-sessionStorage.clear();
 // Simple dialogues with character avatars
 const k = kaplay({
 	background: "#607D8B",
