@@ -16,7 +16,6 @@ export default function callEnding4() {
 
 	k.scene("ending_4", () => {
 		// Loads all sprites
-		loadSprite("jun", "/sprites/junAngy03.png");
 		loadBitmapFont("happy", "/fonts/happy_28x36.png", 28, 36);
 
 		// Define the characters data

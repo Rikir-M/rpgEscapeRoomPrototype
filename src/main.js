@@ -216,7 +216,7 @@ k.scene("intro", () => {
 	// #endregion
 
 	// Loads all sprites
-	loadSprite("jun", "/sprites/junAngy03.png");
+	loadSprite("jen", "/sprites/jenAngy03.png");
 	loadBitmapFont("happy", "/fonts/happy_28x36.png", 28, 36);
 
 	// Define the characters data
@@ -224,37 +224,37 @@ k.scene("intro", () => {
 		narration: {
 			name: "Narration",
 		},
-		jun: {
-			sprite: "jun",
-			name: "Jun",
-			// "sound": "jun_voice",
+		jen: {
+			sprite: "jen",
+			name: "Jen",
+			// "sound": "jen_voice",
 			scale: "0.7",
 		},
 	};
 
 	// Define the dialogue data [character, text, effects]
 	const dialogs = [
-		["jun", "[default]...?[/default]"],
-		["jun", "[surprised]!!![/surprised]", "shake"],
-		["jun", "[default]Wh- where am I?[/default]"],
-		["jun", "[default]Okay. Jun, don't panic.[/default]"],
-		["jun", "[default]...Why would anyone panic waking up in a strange room?[/default]"],
+		["jen", "[default]...?[/default]"],
+		["jen", "[surprised]!!![/surprised]", "shake"],
+		["jen", "[default]Wh- where am I?[/default]"],
+		["jen", "[default]Okay. Jen, don't panic.[/default]"],
+		["jen", "[default]...Why would anyone panic waking up in a strange room?[/default]"],
 		["narration", "[default]You look around the room and notice a digital clock above the only door of the room. But no number is shown.[/default]"],
-		["jun", "[default]What is this, a game? An escape room?[/default]"],
-		["jun", "[default]...Did I forget I signed up for a team-building exercise again?[/default]"],
+		["jen", "[default]What is this, a game? An escape room?[/default]"],
+		["jen", "[default]...Did I forget I signed up for a team-building exercise again?[/default]"],
 		["narration", "[default]You feel the weight on your back and realize there's a backpack you hadn't noticed before.[/default]"],
 		["narration", "[default]Curious, you unzip it slowly, the fabric creaking faintly.[/default]"],
 		["narration", "[default]Inside, three objects come into view.[/default]"],
-		["jun", "[default]...Huh. These...[/default]"],
+		["jen", "[default]...Huh. These...[/default]"],
 		["narration", "[default]A worn-out plushie, a cheap plastic spaceship and an unsent letter slightly crumbled.[/default]", "inventoryOn"],
-		["jun", "[default]...[/default]"],
-		["jun", "[default]Why are these here? Is someone playing a joke?[/default]"],
+		["jen", "[default]...[/default]"],
+		["jen", "[default]Why are these here? Is someone playing a joke?[/default]"],
 		["narration", "[default]You hear a faint voice, no, a whisper.[/default]"],
-		["jun", "[default]Wh- who's there?![/default]"],
+		["jen", "[default]Wh- who's there?![/default]"],
 		["narration", "[default]\"To escape here, you must decide what to keep and what to leave behind.\"[/default]"],
 		["narration", "[default]\"You have 1 minute to make your choice. And the clock's ticking. Your choice will decide if you get out or stay trapped.\"[/default]"],
 		["narration", "[default]The digital clock lights up and the timer starts.[/default]"],
-		["jun", "[default]...[/default]", "timer"],
+		["jen", "[default]...[/default]", "timer"],
 	];
 
 	// Start intro dialogues, then enable inventory and clicks
