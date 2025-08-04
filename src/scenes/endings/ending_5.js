@@ -1,5 +1,6 @@
 import k from "../../main";
 import startDialogueSystem from "../../objects/ui/dialogue/dialogue";
+import callMainMenu from "../mainMenu";
 
 export default function callEnding5() {
 	if (!sessionStorage.getItem("achievement_5")) {
@@ -15,10 +16,7 @@ export default function callEnding5() {
 
 	k.scene("ending_2", () => {
 		// Loads all sprites
-		loadSprite("rikir", "/sprites/rikir.png");
 		loadSprite("jun", "/sprites/junAngy03.png");
-		// loadSound("rikir_voice", "/sounds/rikir_voice.wav");
-		// loadSound("jun_voice", "/sounds/jun_voice.wav");
 		loadBitmapFont("happy", "/fonts/happy_28x36.png", 28, 36);
 
 		// Define the characters data
@@ -36,11 +34,38 @@ export default function callEnding5() {
 		add([
 			anchor("top"),
 			pos(width() / 2, 100),
-			text("ENDING 5 CONTENTS HERE"),
+			text("Guess you've still got space to fill.", {
+				size: 20,
+				width: width() / 3,
+				font: "happy",
+				letterSpacing: 4,
+				align: "center",
+			}),
 			z(10),
 		]);
 
-		startDialogueSystem(characters, dialogs);
+		const backButton = add([
+			text("Back to Main Menu", {
+				size: 24,
+				align: "center",
+			}),
+			anchor("center"),
+			pos(center()),
+			area(),
+			outline(4),
+			color(WHITE),
+			z(20),
+			"back-button",
+		]);
+		backButton.hidden = true;
+
+		onClick("back-button", () => {
+			callMainMenu();
+		});
+
+		startDialogueSystem(characters, dialogs, null, () => {
+			backButton.hidden = false;
+		});
 	});
 
 	return k.go("ending_2");

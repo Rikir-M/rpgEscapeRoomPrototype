@@ -41,7 +41,7 @@ export default function callAchievements() {
 
 		// return button
 		add([
-			text("back", { size: 26 }),
+			text("Back", { size: 26 }),
 			anchor("top"),
 			pos(width() / 5, 100),
 			area(),

@@ -1,3 +1,5 @@
+import { itemDescriptions } from "../../../main";
+
 export function inventorySlot(ref, x, y, index) {
 	ref.add([
 		anchor("left"),
@@ -26,6 +28,44 @@ export function inventorySlot(ref, x, y, index) {
 			ref.use(color(255, 255, 255));
 			sessionStorage.setItem(`slot${index}`, false);
 		}
+	});
+
+	onHover(`item-slot${index}`, () => {
+		const modalBox = get("modal-box")[0];
+		const modalTextBox = get("modal-text")[0];
+
+		if (!modalBox || !modalTextBox) return;
+
+		modalTextBox.text = itemDescriptions[index];
+		modalBox.hidden = false;
+		modalTextBox.hidden = false;
+
+		const modalWidth = 300;
+		const padding = 30;
+
+		wait(0, () => {
+			const height = modalTextBox.height + padding;
+			modalBox.width = modalWidth;
+			modalBox.height = height;
+
+			// Position modal near mouse cursor with some offsets
+			const mpos = mousePos();
+			const offsetX = 50;
+			const offsetY = 8;
+
+			modalBox.pos = vec2(mpos.x - offsetX - modalWidth, mpos.y + offsetY);
+			modalTextBox.pos = vec2(mpos.x - offsetX - modalWidth + 10, mpos.y + offsetY + 10);
+		});
+	});
+
+	onHoverEnd(`item-slot${index}`, () => {
+		const modalBox = get("modal-box")[0];
+		const modalTextBox = get("modal-text")[0];
+
+		if (!modalBox || !modalTextBox) return;
+
+		modalBox.hidden = true;
+		modalTextBox.hidden = true;
 	});
 
 	return ref.add([

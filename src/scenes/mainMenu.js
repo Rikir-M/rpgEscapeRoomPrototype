@@ -58,7 +58,7 @@ export default function callMainMenu() {
 		});
 
 		const logo = add([
-			text("3 minutes to Live"),
+			text("The minutes to Live"),
 			pos(width() / 2, 140),
 			anchor("center"),
 			scale(1.2),

@@ -1,5 +1,6 @@
 import k from "../../main";
 import startDialogueSystem from "../../objects/ui/dialogue/dialogue";
+import callMainMenu from "../mainMenu";
 
 export default function callEnding2() {
 	if (!sessionStorage.getItem("achievement_2")) {
@@ -31,11 +32,38 @@ export default function callEnding2() {
 		add([
 			anchor("top"),
 			pos(width() / 2, 100),
-			text("ENDING 2 CONTENTS HERE"),
+			text("Even when you were trapped in this room, your mind still rockets beyond these walls.", {
+				size: 20,
+				width: width() / 3,
+				font: "happy",
+				letterSpacing: 4,
+				align: "center",
+			}),
 			z(10),
 		]);
 
-		startDialogueSystem(characters, dialogs);
+		const backButton = add([
+			text("Back to Main Menu", {
+				size: 24,
+				align: "center",
+			}),
+			anchor("center"),
+			pos(center()),
+			area(),
+			outline(4),
+			color(WHITE),
+			z(20),
+			"back-button",
+		]);
+		backButton.hidden = true;
+
+		onClick("back-button", () => {
+			callMainMenu();
+		});
+
+		startDialogueSystem(characters, dialogs, null, () => {
+			backButton.hidden = false;
+		});
 	});
 
 	return k.go("ending_2");

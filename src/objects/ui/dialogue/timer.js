@@ -8,7 +8,7 @@ export function timer(timeToAct) {
 		rect(width() - 140, 24, { radius: 4 }),
 		anchor("top"),
 		pos(width() / 2, 100),
-		z(0),
+		z(5),
 		animate(),
 	]);
 
@@ -16,7 +16,7 @@ export function timer(timeToAct) {
 		rect(width() - 140, 24, { radius: 4 }),
 		anchor("top"),
 		pos(width() / 2, 100),
-		z(1),
+		z(6),
 		color(GREEN),
 		animate(),
 	]);
@@ -33,8 +33,8 @@ export function timer(timeToAct) {
 			size: 16,
 		}),
 		anchor("center"),
-		pos(width() / 2, 112), // slightly below the bar
-		z(2),
+		pos(width() / 2, 112),
+		z(7),
 		color(BLACK),
 	]);
 

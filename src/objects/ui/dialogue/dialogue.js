@@ -1,6 +1,6 @@
 import { timer } from "../dialogue/timer";
 
-export default function startDialogueSystem(characters, dialogs, inventoryBar) {
+export default function startDialogueSystem(characters, dialogs, inventoryBar, onComplete) {
 	let inventoryShown = false;
 	// Some effects data
 	const effects = {
@@ -9,7 +9,7 @@ export default function startDialogueSystem(characters, dialogs, inventoryBar) {
 		},
 		// setups a QTE for the player to make a choice
 		timer: () => {
-			timer(10); // change the duration of the timer here (gonna change the timer later)
+			timer(60); // change the duration of the timer here
 		},
 		// show inventory at a certain dialog
 		inventoryOn: () => {
@@ -86,7 +86,11 @@ export default function startDialogueSystem(characters, dialogs, inventoryBar) {
 	]);
 
 	// Character avatar
-	const avatar = add([anchor("center"), pos(center().sub(0, 50)), z(0)]);
+	const avatar = add([
+		anchor("botleft"),
+		pos(30, height()),
+		z(9),
+	]);
 
 	sessionStorage.setItem("allowDialogueClick", true);
 	onClick("textbox", () => {
@@ -102,8 +106,12 @@ export default function startDialogueSystem(characters, dialogs, inventoryBar) {
 		}
 
 		// Cycle through the dialogs
-		curDialog = (curDialog + 1) % dialogs.length;
-			updateDialog();
+		curDialog++;
+		if (curDialog >= dialogs.length) {
+			if (onComplete) onComplete();
+			return;
+		}
+		updateDialog();
 	});
 
 	// Update the on screen sprite & text
