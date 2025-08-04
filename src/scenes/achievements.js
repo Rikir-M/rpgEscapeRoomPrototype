@@ -136,4 +136,4 @@ export default function callAchievements() {
 
 	return k.go("achievements");
 }
-callAchievements();
+// callAchievements();

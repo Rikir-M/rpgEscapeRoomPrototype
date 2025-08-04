@@ -8,8 +8,8 @@ export default function callEnding4() {
 		sessionStorage.setItem(
 			"achievement_4",
 			JSON.stringify({
-				title: "Into the future—And beyond",
-				description: "You made it… but you're exhausted.",
+				title: "Into the future... And beyond",
+				description: "You made it... but you're exhausted.",
 			}),
 		);
 	}

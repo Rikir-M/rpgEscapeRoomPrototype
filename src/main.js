@@ -21,6 +21,8 @@ const k = kaplay({
 	font: "happy",
 });
 
+loadRoot(".");
+
 // #region
 // + ---------------------------------------------- +
 // Inventory
